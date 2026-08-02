@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Solitaire">
+<meta name="theme-color" content="#0a4d27">
+<meta name="description" content="A beautiful, ad-free solitaire game.">
+<title>Solitaire</title>
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <button id="btn-menu" class="bar-btn" aria-label="Menu">
+      <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+    </button>
+    <div id="hud">
+      <div class="hud-item"><span class="hud-label">Time</span><span id="hud-time">0:00</span></div>
+      <div class="hud-item"><span class="hud-label">Moves</span><span id="hud-moves">0</span></div>
+    </div>
+    <button id="btn-undo" class="bar-btn" aria-label="Undo" disabled>
+      <svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5 3 10l5 5M3.5 10H14a6 6 0 0 1 0 12h-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+    </button>
+  </header>
+
+  <main id="board"></main>
+
+  <button id="btn-autocomplete" class="pill-btn hidden">✨ Auto-finish</button>
+
+  <canvas id="cascade" class="hidden"></canvas>
+
+  <!-- Add to Home Screen hint (shown once, only in Safari, not standalone) -->
+  <div id="a2hs" class="hidden">
+    <div class="a2hs-card">
+      <div class="a2hs-text">Add this game to your home screen to play fullscreen &amp; offline: tap
+        <svg viewBox="0 0 24 24" width="18" height="18" style="vertical-align:-3px"><path d="M12 15V3m0 0L8 7m4-4 4 4M5 12v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8" stroke="#2f80ed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        then <b>Add to Home Screen</b></div>
+      <button id="a2hs-close" class="text-btn">Got it</button>
+    </div>
+  </div>
+
+  <!-- Menu -->
+  <div id="dlg-menu" class="overlay hidden">
+    <div class="sheet">
+      <h2>Solitaire</h2>
+      <button class="sheet-btn" id="menu-new">🃏 New game</button>
+      <button class="sheet-btn" id="menu-restart">↩️ Restart this deal</button>
+      <button class="sheet-btn" id="menu-stats">🏆 Statistics</button>
+      <button class="sheet-btn" id="menu-settings">⚙️ Settings</button>
+      <button class="sheet-btn subtle" id="menu-close">Keep playing</button>
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <div id="dlg-settings" class="overlay hidden">
+    <div class="sheet">
+      <h2>Settings</h2>
+      <div class="setting-row">
+        <span>Draw</span>
+        <div class="seg" id="set-draw">
+          <button data-v="1" class="seg-btn">1 card</button>
+          <button data-v="3" class="seg-btn">3 cards</button>
+        </div>
+      </div>
+      <div class="setting-row">
+        <span>Sounds</span>
+        <button id="set-sound" class="toggle" role="switch" aria-checked="true"><span class="knob"></span></button>
+      </div>
+      <div class="setting-row">
+        <span>Left-handed layout</span>
+        <button id="set-lefty" class="toggle" role="switch" aria-checked="false"><span class="knob"></span></button>
+      </div>
+      <p class="hint" id="draw-hint">Draw change takes effect on the next deal.</p>
+      <button class="sheet-btn subtle" id="settings-close">Done</button>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div id="dlg-stats" class="overlay hidden">
+    <div class="sheet">
+      <h2>Statistics</h2>
+      <div class="seg" id="stats-mode">
+        <button data-v="1" class="seg-btn on">Draw 1</button>
+        <button data-v="3" class="seg-btn">Draw 3</button>
+      </div>
+      <div id="stats-grid" class="stats-grid"></div>
+      <button class="sheet-btn subtle" id="stats-close">Close</button>
+    </div>
+  </div>
+
+  <!-- Win -->
+  <div id="dlg-win" class="overlay hidden">
+    <div class="sheet">
+      <h2 id="win-title">You won! 🎉</h2>
+      <div id="win-detail" class="win-detail"></div>
+      <button class="sheet-btn" id="win-new">Play again</button>
+      <button class="sheet-btn subtle" id="win-close">Admire the board</button>
+    </div>
+  </div>
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
