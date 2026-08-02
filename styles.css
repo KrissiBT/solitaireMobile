@@ -193,6 +193,9 @@ body {
 #cascade {
   position: absolute;
   inset: 0;
+  /* Replaced elements don't stretch from inset alone — size must be explicit. */
+  width: 100%;
+  height: 100%;
   z-index: 900;
 }
 

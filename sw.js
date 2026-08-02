@@ -1,6 +1,6 @@
 // Cache-first service worker. Bump CACHE on every deploy — the whole asset
 // list is installed atomically under the new name, old caches are purged.
-const CACHE = 'solitaire-v1';
+const CACHE = 'solitaire-v2';
 const ASSETS = [
   './',
   './index.html',
