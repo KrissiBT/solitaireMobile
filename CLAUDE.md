@@ -66,6 +66,11 @@ fails on any console error. Screenshots land in `tests/out/`.
 
 ## Bugs already learned the hard way
 
+- iOS WebKit rejects `radial-gradient(120% 90% at …)` — the two-value size **requires
+  the `ellipse` keyword** — and an invalid gradient inside the `background` shorthand
+  killed the background-color with it (white canvas, invisible white-on-white UI).
+  Keep `background-color` as its own longhand fallback; emulated-Chromium testing
+  cannot catch WebKit-only parse failures.
 - `#cascade` needs explicit `width/height: 100%`: an absolutely-positioned **replaced**
   element (canvas/img) does not stretch from `inset: 0` alone — it silently uses its
   intrinsic attribute size instead.
