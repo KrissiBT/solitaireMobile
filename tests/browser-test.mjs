@@ -92,6 +92,13 @@ try {
   const errors = logs.filter((l) => l.level === 'SEVERE' && !/favicon/.test(l.message));
   check(errors.length === 0, 'no console errors on load' + (errors.length ? ': ' + JSON.stringify(errors) : ''));
 
+  // Regression: the felt must actually paint. An unparseable background (e.g. the
+  // radial-gradient WebKit rejected without `ellipse`) leaves body transparent →
+  // white canvas and invisible white-on-white UI, while the game stays playable.
+  const bg = await exec(`return getComputedStyle(document.body).backgroundColor`);
+  check(bg && !/^(rgba\(0, 0, 0, 0\)|transparent|rgb\(255, 255, 255\))$/.test(bg),
+    `body background paints (${bg})`);
+
   const info = await exec(`return {
     cards: document.querySelectorAll('.card').length,
     faceUp: document.querySelectorAll('.card.face-up').length,

@@ -1,6 +1,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
+  color-scheme: dark;
   --card-w: 48px;
   --card-h: 67px;
   --felt-1: #1a7a44;
@@ -25,8 +26,12 @@ html, body {
 }
 
 body {
-  background:
-    radial-gradient(120% 90% at 50% 0%, var(--felt-1) 0%, var(--felt-2) 68%, #063118 100%);
+  /* background-color kept as a separate longhand: iOS WebKit rejects the gradient
+     without the `ellipse` keyword, and in a shorthand that turned the whole
+     background transparent (white canvas, invisible white UI). */
+  background-color: var(--felt-2);
+  background-image:
+    radial-gradient(ellipse 120% 90% at 50% 0%, var(--felt-1) 0%, var(--felt-2) 68%, #063118 100%);
   color: #fff;
 }
 
